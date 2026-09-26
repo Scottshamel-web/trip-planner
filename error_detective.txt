@@ -1,0 +1,70 @@
+Error Detective
+
+Snippet 1:
+print("The answer is: " + 42)
+
+Prediction:
+TypeError because Python cannot concatenate a string and an integer.
+
+Actual Error:
+TypeError: can only concatenate str (not "int") to str
+
+Fix:
+print("The answer is: " + str(42))
+
+
+Snippet 2:
+favorite = input("Favorite number: ")
+result = favorite + 10
+print(result)
+
+Prediction:
+TypeError because input() returns a string and 10 is an integer.
+
+Actual Error:
+TypeError: can only concatenate str (not "int") to str
+
+Fix:
+favorite = int(input("Favorite number: "))
+result = favorite + 10
+print(result)
+
+
+Snippet 3:
+print("Hello World)
+
+Prediction:
+SyntaxError because the string is missing the closing quotation mark.
+
+Actual Error:
+SyntaxError: unterminated string literal
+
+Fix:
+print("Hello World")
+
+
+Snippet 4:
+age = int("twenty-five")
+
+Prediction:
+ValueError because "twenty-five" cannot be converted to an integer.
+
+Actual Error:
+ValueError: invalid literal for int() with base 10: 'twenty-five'
+
+Fix:
+age = int("25")
+
+
+Snippet 5:
+print(username)
+
+Prediction:
+NameError because username has not been defined.
+
+Actual Error:
+NameError: name 'username' is not defined
+
+Fix:
+username = "Shamel"
+print(username)
