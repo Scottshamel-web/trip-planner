@@ -1,0 +1,224 @@
+PART 1: BUG ANALYSIS
+
+Bug 1
+
+Original:
+def calculate_stats(numbers)
+
+Problem:
+The function definition is missing a colon at the end.
+
+Error type:
+SyntaxError
+
+Fix:
+def calculate_stats(numbers):
+
+Found:
+Mark "Self" if I found this before using AI.
+Otherwise: AI help.
+
+
+Bug 2
+
+Original:
+if num > average
+
+Problem:
+The if statement is missing a colon.
+
+Error type:
+SyntaxError
+
+Fix:
+if num > average:
+
+Found:
+Mark "Self" if I found this before using AI.
+Otherwise: AI help.
+
+
+Bug 3
+
+Original:
+scores = [85, 92, 78, 95, 88, "70", 93]
+
+Problem:
+"70" is a string while the other scores are integers.
+sum(numbers) cannot add an integer and a string.
+
+Error type:
+TypeError
+
+Fix:
+scores = [85, 92, 78, 95, 88, 70, 93]
+
+Found:
+Mark "Self" if I found this before using AI.
+Otherwise: AI help.
+
+
+Bug 4
+
+Original:
+print(f"Average: {result[average]}")
+
+Problem:
+average is being treated as a variable name instead of the dictionary key "average".
+The variable average only exists inside the function.
+
+Error type:
+NameError
+
+Fix:
+print(f"Average: {result['average']}")
+
+Found:
+Mark "Self" if I found this before using AI.
+Otherwise: AI help.
+
+PART 2: AI CODE REVIEW
+
+Project reviewed:
+grade_analyzer.py
+
+
+QUESTION 1:
+How can I make this code more Pythonic?
+
+AI Suggestion:
+Create a function that determines the letter grade instead of repeating the if/elif logic.
+
+Evaluation:
+This is a useful suggestion because it reduces repeated code and makes the program easier to read and test.
+
+Decision:
+Implement.
+
+Example:
+
+def get_letter_grade(score):
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    elif score >= 60:
+        return "D"
+    else:
+        return "F"
+
+
+AI Suggestion:
+Use more advanced tools such as collections.Counter.
+
+Evaluation:
+Counter could make the code shorter, but it introduces another concept that is not necessary for this beginner exercise.
+
+Decision:
+Do not implement.
+
+Reason:
+The existing dictionary/counter approach is easier to understand at my current level.
+
+
+QUESTION 2:
+What edge cases am I not handling?
+
+AI Suggestion:
+Handle an empty scores list.
+
+Evaluation:
+This is important because dividing by len(scores) when the list is empty would cause a ZeroDivisionError.
+
+Decision:
+Implement.
+
+Possible fix:
+
+if len(scores) == 0:
+    average = 0
+else:
+    average = sum(scores) / len(scores)
+
+
+AI Suggestion:
+Reject scores below 0 or above 100.
+
+Evaluation:
+This is useful because values such as -25 or 150 should not be accepted as valid grades.
+
+Decision:
+Implement.
+
+Example:
+
+if new_score < 0 or new_score > 100:
+    print("Please enter a score between 0 and 100.")
+    continue
+
+
+AI Suggestion:
+Allow decimal scores.
+
+Evaluation:
+This could be useful, but the original exercise uses whole-number scores.
+
+Decision:
+Do not implement for now.
+
+Reason:
+Keeping integers follows the assignment requirements and keeps the program simpler.
+
+
+QUESTION 3:
+Are there any security or reliability concerns?
+
+AI Suggestion:
+Do not use eval() to convert user input.
+
+Evaluation:
+This is correct. eval() can execute arbitrary Python code and would be unsafe for user input.
+
+Decision:
+The program already uses int() inside try/except, so no change is needed.
+
+
+AI Suggestion:
+Catch invalid user input using ValueError.
+
+Evaluation:
+This improves reliability because text such as "abc" would otherwise crash the program.
+
+Decision:
+Implement / Keep existing solution.
+
+Example:
+
+try:
+    new_score = int(user_input)
+except ValueError:
+    print("Please enter a valid number or type 'done'.")
+
+    VERIFICATION
+
+I ran buggy_program.py after making the fixes.
+
+The program ran without errors and produced:
+
+Total: 601
+Average: 85.85714285714286
+Above average: 4 scores
+
+I also tested the grade analyzer after reviewing the AI suggestions.
+
+The original score list contains:
+15 scores
+Average: 74.7
+Highest: 100
+Lowest: 38
+Passing: 12
+Failing: 3
+
+The program continued to work after the reliability improvements.
